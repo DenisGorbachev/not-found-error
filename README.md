@@ -10,6 +10,8 @@
 ## Overview
 
 ```rust
+// Convert Option<i32> to Result<i32, NotFoundError<i32>>
+
 assert_eq!(Some(10).require(), Ok(10));
 
 assert_eq!(None.require(), Err(NotFoundError::<i32>::new()));
@@ -33,9 +35,11 @@ You can convert `Option<T>` to `Result<T, NotFoundError<AnotherType>` using [`no
 ```rust
 use not_found_error::{NotFoundError, require, Require};
 
+// Using the `require` function
 let item = require([1, 2, 3].into_iter().next());
 assert_eq!(item, Ok(1));
 
+// Using the `require` function
 let item = require([].into_iter().next());
 assert_eq!(item, Err(NotFoundError::<i32>::new()));
 
@@ -43,11 +47,12 @@ assert_eq!(item, Err(NotFoundError::<i32>::new()));
 let item = [1, 2, 3].into_iter().next().require();
 assert_eq!(item, Ok(1));
 
+// Using the `require` extension method
 let item = [].into_iter().next().require();
 assert_eq!(item, Err(NotFoundError::<i32>::new()));
 ```
 
-   [__cargo_doc2readme_dependencies_info]: ggGkYW0BYXSEGyMws-dKI-LpG9swkVXG-rikGwSuJGhB0NVbG974QPrPJF6XYXKEG6y2EdDE_B3EGysdnnilLC0XGxJy2eD6vw4zG54qs2kDQa3rYWSBg29ub3QtZm91bmQtZXJyb3JlMC4xLjFvbm90X2ZvdW5kX2Vycm9y
+   [__cargo_doc2readme_dependencies_info]: ggGkYW0BYXSEGyMws-dKI-LpG9swkVXG-rikGwSuJGhB0NVbG974QPrPJF6XYXKEG4uiAprMyl2YGwEqibffC0DYG-1IyG_xaW2ZG8ByAZHP14V5YWSBg29ub3QtZm91bmQtZXJyb3JlMC4xLjJvbm90X2ZvdW5kX2Vycm9y
  [__link0]: https://docs.rs/not-found-error/latest/not_found_error/?search=require
  [__link1]: https://docs.rs/not-found-error/latest/not_found_error/trait.Require.html
  [__link2]: https://docs.rs/not-found-error/latest/not_found_error/?search=not_found

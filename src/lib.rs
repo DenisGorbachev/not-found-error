@@ -2,6 +2,8 @@
 //!
 //! ```
 //! # use not_found_error::{NotFoundError, Require};
+//! // Convert Option<i32> to Result<i32, NotFoundError<i32>>
+//!
 //! assert_eq!(Some(10).require(), Ok(10));
 //!
 //! assert_eq!(None.require(), Err(NotFoundError::<i32>::new()));
@@ -25,9 +27,11 @@
 //! ```
 //! use not_found_error::{NotFoundError, require, Require};
 //!
+//! // Using the `require` function
 //! let item = require([1, 2, 3].into_iter().next());
 //! assert_eq!(item, Ok(1));
 //!
+//! // Using the `require` function
 //! let item = require([].into_iter().next());
 //! assert_eq!(item, Err(NotFoundError::<i32>::new()));
 //!
@@ -35,6 +39,7 @@
 //! let item = [1, 2, 3].into_iter().next().require();
 //! assert_eq!(item, Ok(1));
 //!
+//! // Using the `require` extension method
 //! let item = [].into_iter().next().require();
 //! assert_eq!(item, Err(NotFoundError::<i32>::new()));
 //! ```
