@@ -14,13 +14,13 @@
 //!
 //! You can convert `Option<T>` to `Result<T, NotFoundError<AnotherType>` using [`not_found`](not_found) function or [`OkOrNotFound`](OkOrNotFound) extension trait.
 //!
-//! ## Features
+//! # Features
 //!
 //! * [x] Generic `NotFoundError<T>` type
 //! * [x] Conversion functions and traits to transform `Option<T>` into `Result<T, NotFoundError<T>>`
 //! * [x] Conversion functions and traits to transform `Option<T>` into `Result<T, NotFoundError<AnotherType>>`
 //!
-//! ## Examples
+//! # Examples
 //!
 //! ```
 //! use not_found_error::{NotFoundError, require, Require};

@@ -22,13 +22,13 @@ You can convert `Option<T>` to `Result<T, NotFoundError<T>` using [`require`][__
 
 You can convert `Option<T>` to `Result<T, NotFoundError<AnotherType>` using [`not_found`][__link2] function or [`OkOrNotFound`][__link3] extension trait.
 
-### Features
+## Features
 
 * [x] Generic `NotFoundError<T>` type
 * [x] Conversion functions and traits to transform `Option<T>` into `Result<T, NotFoundError<T>>`
 * [x] Conversion functions and traits to transform `Option<T>` into `Result<T, NotFoundError<AnotherType>>`
 
-### Examples
+## Examples
 
 ```rust
 use not_found_error::{NotFoundError, require, Require};
@@ -47,7 +47,7 @@ let item = [].into_iter().next().require();
 assert_eq!(item, Err(NotFoundError::<i32>::new()));
 ```
 
-   [__cargo_doc2readme_dependencies_info]: ggGkYW0BYXSEGyMws-dKI-LpG9swkVXG-rikGwSuJGhB0NVbG974QPrPJF6XYXKEG8PcbfiR6F5OG44vaPIUTCalG860Z8XQpFFxG9DnXii0XjCRYWSBg29ub3QtZm91bmQtZXJyb3JlMC4xLjFvbm90X2ZvdW5kX2Vycm9y
+   [__cargo_doc2readme_dependencies_info]: ggGkYW0BYXSEGyMws-dKI-LpG9swkVXG-rikGwSuJGhB0NVbG974QPrPJF6XYXKEG6y2EdDE_B3EGysdnnilLC0XGxJy2eD6vw4zG54qs2kDQa3rYWSBg29ub3QtZm91bmQtZXJyb3JlMC4xLjFvbm90X2ZvdW5kX2Vycm9y
  [__link0]: https://docs.rs/not-found-error/latest/not_found_error/?search=require
  [__link1]: https://docs.rs/not-found-error/latest/not_found_error/trait.Require.html
  [__link2]: https://docs.rs/not-found-error/latest/not_found_error/?search=not_found
