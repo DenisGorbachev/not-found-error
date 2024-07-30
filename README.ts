@@ -73,14 +73,12 @@ ${doc.stdout}
 ## Installation
 
 \`\`\`shell
-cargo add ${name} url
+cargo add ${name}
 \`\`\`
-
-**Important:** add the \`url\` crate too.
 
 ## Gratitude
 
-Like the project? [Say thanks!](${repo.url}/discussions/new?category=gratitude) ❤️
+Like the project? [Say thanks!](${repo.url}/discussions/new) ❤️
 
 ## License
 

@@ -1,17 +1,81 @@
+//! # Overview
+//!
+//! This crate provides a generic `NotFoundError<T>` type and associated
+//! utilities for handling "not found" scenarios in a type-safe and ergonomic manner.
+//!
+//! You can convert `Option<T>` to `Result<T, NotFoundError<T>` using [`require`](require) function or [`Require`](Require) extension trait.
+//!
+//! You can convert `Option<T>` to `Result<T, NotFoundError<AnotherType>` using [`not_found`](not_found) function or [`OkOrNotFound`](OkOrNotFound) extension trait.
+//!
+//! ## Features
+//!
+//! [x] Generic `NotFoundError<T>` type
+//! [x] Conversion functions and traits to transform `Option<T>` into `Result<T, NotFoundError<T>>`
+//! [x] Conversion functions and traits to transform `Option<T>` into `Result<T, NotFoundError<AnotherType>>`
+//!
+//! ## Examples
+//!
+//! ```
+//! use not_found_error::{NotFoundError, require, Require};
+//!
+//! let item = require([1, 2, 3].into_iter().next());
+//! assert_eq!(item, Ok(1));
+//!
+//! let item = require([].into_iter().next());
+//! assert_eq!(item, Err(NotFoundError::<i32>::new()));
+//!
+//! // Using the `require` extension method
+//! let item = [1, 2, 3].into_iter().next().require();
+//! assert_eq!(item, Ok(1));
+//!
+//! let item = [].into_iter().next().require();
+//! assert_eq!(item, Err(NotFoundError::<i32>::new()));
+//! ```
+
 use std::any::type_name;
 use std::error::Error;
 use std::fmt::{Debug, Formatter};
 use std::marker::PhantomData;
 
+/// Represents an error indicating that a value was not found.
+///
+/// This struct is generic over the type `T` that was not found.
+///
+/// # Examples
+///
+/// ```
+/// use not_found_error::NotFoundError;
+///
+/// let error: NotFoundError<i32> = NotFoundError::new();
+/// assert_eq!(error.to_string(), "i32 not found");
+/// ```
 #[derive(Eq, PartialEq, Ord, PartialOrd, Hash, Clone, Copy, Debug)]
 pub struct NotFoundError<T>(pub PhantomData<T>);
 
 impl<T> NotFoundError<T> {
+    /// Creates a new `NotFoundError`.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use not_found_error::NotFoundError;
+    ///
+    /// let error: NotFoundError<String> = NotFoundError::new();
+    /// ```
     pub fn new() -> Self {
         Self(PhantomData)
     }
 
-    /// Convenience method to automatically convert the error to a result
+    /// Convenience method to automatically convert the error to a result.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use not_found_error::NotFoundError;
+    ///
+    /// let result: Result<i32, NotFoundError<i32>> = NotFoundError::result();
+    /// assert!(result.is_err());
+    /// ```
     pub fn result<Err: From<Self>>() -> Result<T, Err> {
         Err(Self::new().into())
     }
@@ -33,8 +97,6 @@ impl<T: Debug> Error for NotFoundError<T> {}
 
 /// Converts `Option<T>` to `Result<T, NotFoundError<T>>`
 ///
-/// See also: [`Require`](Require)
-///
 /// # Examples
 ///
 /// ```
@@ -42,6 +104,11 @@ impl<T: Debug> Error for NotFoundError<T> {}
 /// # let items = [0, 1, 2];
 /// let item = require(items.first());
 /// ```
+///
+/// # See also
+///
+/// - [`Require`]: Trait for converting `Option<T>` to `Result<T, NotFoundError<T>>`
+/// - [`OkOrNotFound`]: Trait for converting `Option<T>` to `Result<T, NotFoundError<AnotherType>>`
 #[inline(always)]
 pub fn require<T>(option: Option<T>) -> Result<T, NotFoundError<T>> {
     option.ok_or(NotFoundError(PhantomData))
@@ -62,8 +129,13 @@ pub fn require<T>(option: Option<T>) -> Result<T, NotFoundError<T>> {
 /// }
 /// # pub fn find_root(path: &Path) -> Option<&Path> { todo!() }
 /// ```
+///
+/// # See also
+///
+/// - [`require`]: Function to convert `Option<T>` to `Result<T, NotFoundError<T>>`
+/// - [`OkOrNotFound`]: Trait for converting `Option<T>` to `Result<T, NotFoundError<AnotherType>>`
 #[inline(always)]
-pub fn not_found<T>() -> NotFoundError<T> {
+pub fn not_found<AnotherType>() -> NotFoundError<AnotherType> {
     NotFoundError(PhantomData)
 }
 
@@ -76,6 +148,11 @@ pub fn not_found<T>() -> NotFoundError<T> {
 /// # let items = [0, 1, 2];
 /// let item = items.first().require();
 /// ```
+///
+/// # See also
+///
+/// - [`require`]: Function to convert `Option<T>` to `Result<T, NotFoundError<T>>`
+/// - [`OkOrNotFound`]: Trait for converting `Option<T>` to `Result<T, NotFoundError<AnotherType>>`
 pub trait Require {
     type T;
 
@@ -106,6 +183,11 @@ impl<T> Require for Option<T> {
 /// }
 /// # pub fn find_root(path: &Path) -> Option<&Path> { todo!() }
 /// ```
+///
+/// # See also
+///
+/// - [`Require`]: Trait for converting `Option<T>` to `Result<T, NotFoundError<T>>`
+/// - [`require`]: Function to convert `Option<T>` to `Result<T, NotFoundError<T>>`
 pub trait OkOrNotFound {
     type T;
 

@@ -7,20 +7,59 @@
 [![Build](https://github.com/DenisGorbachev/not-found-error/actions/workflows/ci.yml/badge.svg)](https://github.com/DenisGorbachev/not-found-error)
 [![Documentation](https://docs.rs/not-found-error/badge.svg)](https://docs.rs/not-found-error)
 
+## Overview
 
+This crate provides a generic `NotFoundError<T>` type and associated
+utilities for handling “not found” scenarios in a type-safe and ergonomic manner.
+
+You can convert `Option<T>` to `Result<T, NotFoundError<T>` using [`require`][__link0] function or [`Require`][__link1] extension trait.
+
+You can convert `Option<T>` to `Result<T, NotFoundError<AnotherType>` using [`not_found`][__link2] function or [`OkOrNotFound`][__link3] extension trait.
+
+### Features
+
+[x][__link4] Generic `NotFoundError<T>` type
+[x][__link5] Conversion functions and traits to transform `Option<T>` into `Result<T, NotFoundError<T>>`
+[x][__link6] Conversion functions and traits to transform `Option<T>` into `Result<T, NotFoundError<AnotherType>>`
+
+### Examples
+
+```rust
+use not_found_error::{NotFoundError, require, Require};
+
+let item = require([1, 2, 3].into_iter().next());
+assert_eq!(item, Ok(1));
+
+let item = require([].into_iter().next());
+assert_eq!(item, Err(NotFoundError::<i32>::new()));
+
+// Using the `require` extension method
+let item = [1, 2, 3].into_iter().next().require();
+assert_eq!(item, Ok(1));
+
+let item = [].into_iter().next().require();
+assert_eq!(item, Err(NotFoundError::<i32>::new()));
+```
+
+   [__cargo_doc2readme_dependencies_info]: ggGkYW0BYXSEGyMws-dKI-LpG9swkVXG-rikGwSuJGhB0NVbG974QPrPJF6XYXKEGz_U-kCuoCCMG8wQQ_UfBaT8G0dx2UXm7RiZG_m5NFa70eIGYWSCg29ub3QtZm91bmQtZXJyb3JlMC4xLjBvbm90X2ZvdW5kX2Vycm9ygmF49g
+ [__link0]: https://docs.rs/not-found-error/latest/not_found_error/?search=require
+ [__link1]: https://docs.rs/not-found-error/latest/not_found_error/trait.Require.html
+ [__link2]: https://docs.rs/not-found-error/latest/not_found_error/?search=not_found
+ [__link3]: https://docs.rs/not-found-error/latest/not_found_error/trait.OkOrNotFound.html
+ [__link4]: https://crates.io/crates/x
+ [__link5]: https://crates.io/crates/x
+ [__link6]: https://crates.io/crates/x
 
 
 ## Installation
 
 ```shell
-cargo add not-found-error url
+cargo add not-found-error
 ```
-
-**Important:** add the `url` crate too.
 
 ## Gratitude
 
-Like the project? [Say thanks!](https://github.com/DenisGorbachev/not-found-error/discussions/new?category=gratitude) ❤️
+Like the project? [Say thanks!](https://github.com/DenisGorbachev/not-found-error/discussions/new) ❤️
 
 ## License
 
