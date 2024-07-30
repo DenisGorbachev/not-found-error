@@ -1,8 +1,8 @@
 [package]
 name = "not-found-error"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
-description = "Convert Option<T> to Result<T, NotFoundError<T>> using convenient functions and extension methods"
+description = "Convert Option to Result using convenient functions"
 license = "Apache-2.0 OR MIT"
 homepage = "https://github.com/DenisGorbachev/not-found-error"
 repository = "https://github.com/DenisGorbachev/not-found-error"
@@ -12,7 +12,7 @@ categories = ["rust-patterns", "development-tools"]
 
 
 [package.metadata.details]
-title = "Convert Option<T> to Result<T, NotFoundError<T>> using convenient functions and extension methods"
+title = "Convert Option to Result"
 tagline = ""
 summary = ""
 announcement = ""

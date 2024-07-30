@@ -1,5 +1,12 @@
 //! # Overview
 //!
+//! ```
+//! # use not_found_error::{NotFoundError, Require};
+//! assert_eq!(Some(10).require(), Ok(10));
+//!
+//! assert_eq!(None.require(), Err(NotFoundError::<i32>::new()));
+//! ```
+//!
 //! This crate provides a generic `NotFoundError<T>` type and associated
 //! utilities for handling "not found" scenarios in a type-safe and ergonomic manner.
 //!
@@ -9,9 +16,9 @@
 //!
 //! ## Features
 //!
-//! [x] Generic `NotFoundError<T>` type
-//! [x] Conversion functions and traits to transform `Option<T>` into `Result<T, NotFoundError<T>>`
-//! [x] Conversion functions and traits to transform `Option<T>` into `Result<T, NotFoundError<AnotherType>>`
+//! * [x] Generic `NotFoundError<T>` type
+//! * [x] Conversion functions and traits to transform `Option<T>` into `Result<T, NotFoundError<T>>`
+//! * [x] Conversion functions and traits to transform `Option<T>` into `Result<T, NotFoundError<AnotherType>>`
 //!
 //! ## Examples
 //!
