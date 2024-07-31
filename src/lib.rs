@@ -25,7 +25,7 @@
 //! # Examples
 //!
 //! ```
-//! use not_found_error::{NotFoundError, require, Require};
+//! use not_found_error::{NotFoundError, Require, locate, require};
 //!
 //! // Using the `require` function
 //! let item = require([1, 2, 3].into_iter().next());
@@ -42,6 +42,11 @@
 //! // Using the `require` extension method
 //! let item = [].into_iter().next().require();
 //! assert_eq!(item, Err(NotFoundError::<i32>::new()));
+//!
+//! // Try to find a number greater than 10 (which doesn't exist in our list)
+//! let numbers = &[1, 2, 3];
+//! let result = locate(numbers, |&&n| n == 0);
+//! assert_eq!(result, Err(NotFoundError::new()));
 //! ```
 
 use std::any::type_name;
@@ -213,4 +218,27 @@ impl<T> OkOrNotFound for Option<T> {
     fn ok_or_not_found<B>(self) -> Result<Self::T, NotFoundError<B>> {
         self.ok_or(NotFoundError(PhantomData))
     }
+}
+
+/// Searches an iterator for an element that satisfies a given predicate and returns a reference to it.
+///
+/// This function is different from [`Iterator::find`] because it returns `Result<&T, NotFoundError<&T>>` (not `Option<&T>`).
+///
+/// # Examples
+///
+/// ```
+/// # use not_found_error::{locate, NotFoundError};
+///
+/// let numbers = &[1, 2, 3, 4, 5];
+///
+/// // Find the first even number
+/// let result = locate(numbers, |&&n| n % 2 == 0);
+/// assert_eq!(result, Ok(&2));
+///
+/// // Try to find a number greater than 10 (which doesn't exist in our list)
+/// let result = locate(numbers, |&&n| n > 10);
+/// assert_eq!(result, Err(NotFoundError::new()));
+/// ```
+pub fn locate<T>(iter: impl IntoIterator<Item = T>, f: impl FnMut(&T) -> bool) -> Result<T, NotFoundError<T>> {
+    require(iter.into_iter().find(f))
 }

@@ -33,7 +33,7 @@ You can convert `Option<T>` to `Result<T, NotFoundError<AnotherType>` using [`no
 ## Examples
 
 ```rust
-use not_found_error::{NotFoundError, require, Require};
+use not_found_error::{NotFoundError, Require, locate, require};
 
 // Using the `require` function
 let item = require([1, 2, 3].into_iter().next());
@@ -50,9 +50,14 @@ assert_eq!(item, Ok(1));
 // Using the `require` extension method
 let item = [].into_iter().next().require();
 assert_eq!(item, Err(NotFoundError::<i32>::new()));
+
+// Try to find a number greater than 10 (which doesn't exist in our list)
+let numbers = &[1, 2, 3];
+let result = locate(numbers, |&&n| n == 0);
+assert_eq!(result, Err(NotFoundError::new()));
 ```
 
-   [__cargo_doc2readme_dependencies_info]: ggGkYW0BYXSEGyMws-dKI-LpG9swkVXG-rikGwSuJGhB0NVbG974QPrPJF6XYXKEG4uiAprMyl2YGwEqibffC0DYG-1IyG_xaW2ZG8ByAZHP14V5YWSBg29ub3QtZm91bmQtZXJyb3JlMC4xLjRvbm90X2ZvdW5kX2Vycm9y
+   [__cargo_doc2readme_dependencies_info]: ggGkYW0BYXSEGyMws-dKI-LpG9swkVXG-rikGwSuJGhB0NVbG974QPrPJF6XYXKEGwRzzb7naNYKG2gdwYR7DdCLG0pVq38AfRxlG0D7v_C8zAyOYWSBg29ub3QtZm91bmQtZXJyb3JlMC4xLjVvbm90X2ZvdW5kX2Vycm9y
  [__link0]: https://docs.rs/not-found-error/latest/not_found_error/?search=require
  [__link1]: https://docs.rs/not-found-error/latest/not_found_error/trait.Require.html
  [__link2]: https://docs.rs/not-found-error/latest/not_found_error/?search=not_found
