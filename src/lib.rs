@@ -239,6 +239,6 @@ impl<T> OkOrNotFound for Option<T> {
 /// let result = locate(numbers, |&&n| n > 10);
 /// assert_eq!(result, Err(NotFoundError::new()));
 /// ```
-pub fn locate<T>(iter: impl IntoIterator<Item = T>, f: impl FnMut(&T) -> bool) -> Result<T, NotFoundError<T>> {
-    require(iter.into_iter().find(f))
+pub fn locate<'a, T>(iter: impl IntoIterator<Item = &'a T>, f: impl FnMut(&&T) -> bool) -> Result<&'a T, NotFoundError<T>> {
+    iter.into_iter().find(f).ok_or_not_found()
 }
