@@ -52,7 +52,7 @@ let item = [].into_iter().next().require();
 assert_eq!(item, Err(NotFoundError::<i32>::new()));
 ```
 
-   [__cargo_doc2readme_dependencies_info]: ggGkYW0BYXSEGyMws-dKI-LpG9swkVXG-rikGwSuJGhB0NVbG974QPrPJF6XYXKEG4uiAprMyl2YGwEqibffC0DYG-1IyG_xaW2ZG8ByAZHP14V5YWSBg29ub3QtZm91bmQtZXJyb3JlMC4xLjNvbm90X2ZvdW5kX2Vycm9y
+   [__cargo_doc2readme_dependencies_info]: ggGkYW0BYXSEGyMws-dKI-LpG9swkVXG-rikGwSuJGhB0NVbG974QPrPJF6XYXKEG4uiAprMyl2YGwEqibffC0DYG-1IyG_xaW2ZG8ByAZHP14V5YWSBg29ub3QtZm91bmQtZXJyb3JlMC4xLjRvbm90X2ZvdW5kX2Vycm9y
  [__link0]: https://docs.rs/not-found-error/latest/not_found_error/?search=require
  [__link1]: https://docs.rs/not-found-error/latest/not_found_error/trait.Require.html
  [__link2]: https://docs.rs/not-found-error/latest/not_found_error/?search=not_found
