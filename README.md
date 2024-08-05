@@ -72,7 +72,7 @@ cargo add not-found-error
 
 ## Gratitude
 
-Like the project? [Say thanks!](https://github.com/DenisGorbachev/not-found-error/discussions/new/choose) ❤️
+Like the project? [⭐ Star this repo](https://github.com/DenisGorbachev/not-found-error) on GitHub!
 
 ## License
 
