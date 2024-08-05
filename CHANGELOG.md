@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1](https://github.com/DenisGorbachev/not-found-error/compare/v0.2.0...v0.2.1) - 2024-08-05
+
+### Other
+- use the star link
+- fix caching
+- improve caching
+
 ## [0.1.6](https://github.com/DenisGorbachev/not-found-error/compare/v0.1.5...v0.1.6) - 2024-07-31
 
 ### Added
