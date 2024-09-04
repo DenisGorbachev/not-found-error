@@ -10,7 +10,6 @@ readme = "README.md"
 keywords = ["tools", "option", "result"]
 categories = ["rust-patterns", "development-tools"]
 
-
 [package.metadata.details]
 title = "Convert Option to Result"
 tagline = ""
