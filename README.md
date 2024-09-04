@@ -57,7 +57,7 @@ let result = locate(numbers, |&&n| n == 0);
 assert_eq!(result, Err(NotFoundError::new()));
 ```
 
-   [__cargo_doc2readme_dependencies_info]: ggGkYW0BYXSEGyMws-dKI-LpG9swkVXG-rikGwSuJGhB0NVbG974QPrPJF6XYXKEGwRzzb7naNYKG2gdwYR7DdCLG0pVq38AfRxlG0D7v_C8zAyOYWSBg29ub3QtZm91bmQtZXJyb3JlMC4yLjBvbm90X2ZvdW5kX2Vycm9y
+   [__cargo_doc2readme_dependencies_info]: ggGkYW0BYXSEGyMws-dKI-LpG9swkVXG-rikGwSuJGhB0NVbG974QPrPJF6XYXKEGwRzzb7naNYKG2gdwYR7DdCLG0pVq38AfRxlG0D7v_C8zAyOYWSBg29ub3QtZm91bmQtZXJyb3JlMC4yLjFvbm90X2ZvdW5kX2Vycm9y
  [__link0]: https://docs.rs/not-found-error/latest/not_found_error/?search=require
  [__link1]: https://docs.rs/not-found-error/latest/not_found_error/trait.Require.html
  [__link2]: https://docs.rs/not-found-error/latest/not_found_error/?search=not_found
