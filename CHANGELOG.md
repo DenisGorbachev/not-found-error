@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.2](https://github.com/DenisGorbachev/not-found-error/compare/v0.2.1...v0.2.2) - 2024-09-04
+
+### Other
+- config
+- Merge branch 'main' of github.com:DenisGorbachev/not-found-error
+- sort deps
+- sort deps
+
 ## [0.2.1](https://github.com/DenisGorbachev/not-found-error/compare/v0.2.0...v0.2.1) - 2024-08-05
 
 ### Other
