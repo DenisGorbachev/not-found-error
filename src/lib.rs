@@ -93,8 +93,8 @@ impl<T> NotFoundError<T> {
     /// let result: Result<i32, NotFoundError<i32>> = NotFoundError::result();
     /// assert!(result.is_err());
     /// ```
-    pub fn result<Err: From<Self>>() -> Result<T, Err> {
-        Err(Self::new().into())
+    pub fn result() -> Result<T> {
+        Err(Self::new())
     }
 }
 
@@ -112,6 +112,9 @@ impl<T> std::fmt::Display for NotFoundError<T> {
 
 impl<T: Debug> Error for NotFoundError<T> {}
 
+/// A type alias for `Result<T, NotFoundError<T>>`
+pub type Result<T> = core::result::Result<T, NotFoundError<T>>;
+
 /// Converts `Option<T>` to `Result<T, NotFoundError<T>>`
 ///
 /// # Examples
@@ -127,7 +130,7 @@ impl<T: Debug> Error for NotFoundError<T> {}
 /// - [`Require`]: Trait for converting `Option<T>` to `Result<T, NotFoundError<T>>`
 /// - [`OkOrNotFound`]: Trait for converting `Option<T>` to `Result<T, NotFoundError<AnotherType>>`
 #[inline(always)]
-pub fn require<T>(option: Option<T>) -> Result<T, NotFoundError<T>> {
+pub fn require<T>(option: Option<T>) -> Result<T> {
     option.ok_or(NotFoundError(PhantomData))
 }
 
@@ -173,14 +176,14 @@ pub fn not_found<AnotherType>() -> NotFoundError<AnotherType> {
 pub trait Require {
     type T;
 
-    fn require(self) -> Result<Self::T, NotFoundError<Self::T>>;
+    fn require(self) -> Result<Self::T>;
 }
 
 impl<T> Require for Option<T> {
     type T = T;
 
     #[inline(always)]
-    fn require(self) -> Result<Self::T, NotFoundError<Self::T>> {
+    fn require(self) -> Result<Self::T> {
         self.ok_or(NotFoundError(PhantomData))
     }
 }
@@ -208,14 +211,14 @@ impl<T> Require for Option<T> {
 pub trait OkOrNotFound {
     type T;
 
-    fn ok_or_not_found<B>(self) -> Result<Self::T, NotFoundError<B>>;
+    fn ok_or_not_found<B>(self) -> core::result::Result<Self::T, NotFoundError<B>>;
 }
 
 impl<T> OkOrNotFound for Option<T> {
     type T = T;
 
     #[inline(always)]
-    fn ok_or_not_found<B>(self) -> Result<Self::T, NotFoundError<B>> {
+    fn ok_or_not_found<B>(self) -> core::result::Result<Self::T, NotFoundError<B>> {
         self.ok_or(NotFoundError(PhantomData))
     }
 }
@@ -239,6 +242,6 @@ impl<T> OkOrNotFound for Option<T> {
 /// let result = locate(numbers, |&&n| n > 10);
 /// assert_eq!(result, Err(NotFoundError::new()));
 /// ```
-pub fn locate<'a, T>(iter: impl IntoIterator<Item = &'a T>, f: impl FnMut(&&T) -> bool) -> Result<&'a T, NotFoundError<T>> {
+pub fn locate<'a, T>(iter: impl IntoIterator<Item = &'a T>, f: impl FnMut(&&T) -> bool) -> core::result::Result<&'a T, NotFoundError<T>> {
     iter.into_iter().find(f).ok_or_not_found()
 }
